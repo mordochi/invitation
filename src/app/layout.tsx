@@ -1,15 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  Herr_Von_Muellerhoff,
+  Monsieur_La_Doulaise,
+} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const herrVonMuellerhoff = Herr_Von_Muellerhoff({
   subsets: ["latin"],
+  weight: "400",
+  variable: "--font-herr-von-muellerhoff",
+});
+
+const monsieurLaDoulaise = Monsieur_La_Doulaise({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-monsieur-la-doulaise",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${cormorantGaramond.variable} ${herrVonMuellerhoff.variable} ${monsieurLaDoulaise.variable}`}
       >
         {children}
       </body>

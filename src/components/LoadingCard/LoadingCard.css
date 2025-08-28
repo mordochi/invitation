@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Monsieur+La+Doulaise&family=Herr+Von+Muellerhoff&display=swap");
+/* Fonts are now loaded via Next.js font optimization in layout.tsx */
 
 .loading-card {
   position: relative;
