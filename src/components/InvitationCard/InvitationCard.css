@@ -305,7 +305,7 @@
 @media (max-width: 768px) {
   .card-flip {
     /* Keep the same vh-based sizing on mobile while preventing overflow */
-    height: min(100vh, calc(100vw * 1.5));
+    height: min(100dvh, calc(100vw * 1.5));
     aspect-ratio: 2 / 3;
     width: auto;
     max-width: 100%;
