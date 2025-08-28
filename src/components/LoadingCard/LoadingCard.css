@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Monsieur+La+Doulaise&family=Herr+Von+Muellerhoff&display=swap");
+
+.loading-card {
+  position: relative;
+  height: calc(100dvh - 4rem);
+  aspect-ratio: 2 / 3;
+  width: auto;
+  max-width: calc(100vw - 4rem);
+  max-height: calc(100dvh - 4rem);
+  min-width: 200px;
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(40, 40, 40, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(60, 60, 60, 0.2) 0%,
+      transparent 50%
+    ),
+    linear-gradient(
+      135deg,
+      #0a0a0a 0%,
+      #1a1a1a 25%,
+      #000000 50%,
+      #1a1a1a 75%,
+      #0a0a0a 100%
+    );
+  border-radius: 12px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: loadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% {
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 25px 50px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+
+.loading-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+  animation: loadingShine 3s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes loadingShine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(0%) translateY(0%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.loading-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: min(3rem, 6vh) min(2rem, 4vw);
+  gap: clamp(1.5rem, 4vh, 3rem);
+}
+
+.loading-circle {
+  position: relative;
+  width: clamp(150px, 25vw, 250px);
+  height: clamp(150px, 25vw, 250px);
+  border: clamp(1px, 0.3vw, 3px) solid rgba(205, 187, 89, 0.3);
+  border-radius: 50%;
+  background: rgba(205, 187, 89, 0.05);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.loading-circle::before {
+  content: "";
+  position: absolute;
+  top: clamp(-5px, -1.5vw, -15px);
+  left: clamp(-5px, -1.5vw, -15px);
+  right: clamp(-5px, -1.5vw, -15px);
+  bottom: clamp(-5px, -1.5vw, -15px);
+  border: 1px solid rgba(205, 187, 89, 0.15);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.loading-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(205, 187, 89, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.loading-lines {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1.5vh, 1rem);
+  align-items: center;
+  width: 100%;
+}
+
+.loading-line {
+  height: clamp(8px, 1.5vh, 12px);
+  background: linear-gradient(
+    90deg,
+    rgba(205, 187, 89, 0.2) 0%,
+    rgba(205, 187, 89, 0.4) 50%,
+    rgba(205, 187, 89, 0.2) 100%
+  );
+  border-radius: 6px;
+  animation: lineShimmer 2s infinite ease-in-out;
+}
+
+.loading-line.short {
+  width: 40%;
+  animation-delay: 0s;
+}
+
+.loading-line.medium {
+  width: 60%;
+  animation-delay: 0.3s;
+}
+
+.loading-line.long {
+  width: 80%;
+  animation-delay: 0.6s;
+}
+
+@keyframes lineShimmer {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleX(0.8);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleX(1);
+  }
+}
+
+.loading-sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.loading-sparkle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, #cdbb59 0%, #d4c366 50%, transparent 70%);
+  border-radius: 50%;
+  animation: loadingSparkleAnimation 3s infinite ease-in-out;
+}
+
+@keyframes loadingSparkleAnimation {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .loading-card {
+    height: min(100vh, calc(100vw * 1.5));
+    aspect-ratio: 2 / 3;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .loading-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .loading-circle {
+    width: 160px;
+    height: 160px;
+  }
+}

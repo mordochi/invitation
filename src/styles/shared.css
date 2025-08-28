@@ -1,0 +1,24 @@
+/* Shared container styles for invitation components */
+.invitation-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* stack vertically */
+  --pad: 2rem;
+  padding: var(--pad);
+  box-sizing: border-box; /* include padding in height */
+  height: 100dvh; /* fixed viewport height so children can use 100% */
+  width: 100%;
+  /* 3D perspective for flip */
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+}
+
+@media (max-width: 768px) {
+    .invitation-container {
+      flex-direction: column;
+      gap: clamp(1rem, 3vh, 2rem);
+      padding: clamp(0.5rem, 2vw, 1.5rem);
+    }
+}

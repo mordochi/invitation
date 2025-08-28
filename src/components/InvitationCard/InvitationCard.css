@@ -1,21 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Monsieur+La+Doulaise&family=Herr+Von+Muellerhoff&display=swap");
 
-.invitation-container {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* stack vertically */
-  --pad: 2rem;
-  padding: var(--pad);
-  box-sizing: border-box; /* include padding in height */
-  height: 100dvh; /* fixed viewport height so children can use 100% */
-  width: 100%;
-  /* 3D perspective for flip */
-  perspective: 1200px;
-  -webkit-perspective: 1200px;
-}
-
 /* Flip wrapper: holds front/back faces and controls rotation */
 .card-flip {
   position: relative;
@@ -319,12 +303,6 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .invitation-container {
-    flex-direction: column;
-    gap: clamp(1rem, 3vh, 2rem);
-    padding: clamp(0.5rem, 2vw, 1.5rem);
-  }
-
   .card-flip {
     /* Keep the same vh-based sizing on mobile while preventing overflow */
     height: min(100vh, calc(100vw * 1.5));
