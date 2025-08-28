@@ -1,0 +1,344 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Monsieur+La+Doulaise&family=Herr+Von+Muellerhoff&display=swap");
+
+.invitation-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* stack vertically */
+  --pad: 2rem;
+  padding: var(--pad);
+  box-sizing: border-box; /* include padding in height */
+  height: 100dvh; /* fixed viewport height so children can use 100% */
+  width: 100%;
+  /* 3D perspective for flip */
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+}
+
+/* Flip wrapper: holds front/back faces and controls rotation */
+.card-flip {
+  position: relative;
+  /* Set definitive height from viewport minus padding; width derives from ratio */
+  height: calc(100dvh - var(--pad) * 2);
+  aspect-ratio: 2 / 3;
+  width: auto;
+  max-width: calc(100vw - var(--pad) * 2);
+  max-height: calc(100dvh - var(--pad) * 2);
+  min-width: 200px; /* ensure visibility on very small widths */
+  background:
+  radial-gradient(
+    circle at 20% 30%,
+    rgba(40, 40, 40, 0.3) 0%,
+    transparent 50%
+  ),
+  radial-gradient(
+    circle at 80% 70%,
+    rgba(60, 60, 60, 0.2) 0%,
+    transparent 50%
+  ),
+  linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #1a1a1a 25%,
+    #000000 50%,
+    #1a1a1a 75%,
+    #0a0a0a 100%
+  );
+  border-radius: 12px;
+  box-shadow:
+  0 20px 40px rgba(0, 0, 0, 0.6),
+  inset 0 1px 0 rgba(255, 255, 255, 0.1),
+  inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  /* Enable 3D stacking for faces */
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+  cursor: pointer;
+  will-change: transform;
+  /* Avoid clipping during 3D flip */
+  overflow: visible;
+  isolation: isolate;
+}
+
+.card-flip.is-flipped {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+@keyframes fade-out {
+  1%, 40%{
+    opacity: 1;
+  }
+
+  45%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  1%, 40%{
+    opacity: 0;
+  }
+
+  45%, 100% {
+    opacity: 1;
+  }
+}
+
+/* Removed child-level backface rules to avoid iOS hiding content */
+
+.front { transform: rotateY(0deg); z-index: 1; animation: fade-in 0.5s ease forwards; }
+.back { transform: rotateY(-180deg); z-index: 0; opacity: 0; animation: fade-out 0.5s ease forwards; }
+
+/* Interaction: only the visible face should be interactive */
+.card-flip:not(.is-flipped) .back { pointer-events: none; }
+.card-flip.is-flipped .front { pointer-events: none; z-index: 0; animation: fade-out 0.5s ease forwards; }
+.card-flip.is-flipped .back { z-index: 1; animation: fade-in 0.5s ease forwards; }
+
+/* Default state: back is hidden and non-interactive */
+.card-flip:not(.is-flipped) .back { pointer-events: none; }
+.card-flip:not(.is-flipped) .front { pointer-events: auto; }
+
+/* Remove backface rules; not needed with crossfade */
+
+.invitation-card,
+.menu-card {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.invitation-card::before,
+.menu-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+  animation: shine 4s infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(0%) translateY(0%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.card-flip:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sparkle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, #cdbb59 0%, #d4c366 50%, transparent 70%);
+  border-radius: 50%;
+  animation: sparkleAnimation 3s infinite ease-in-out;
+}
+
+@keyframes sparkleAnimation {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: min(3rem, 6vh) min(2rem, 4vw);
+  text-align: center;
+}
+
+.venue-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+  color: #cdbb59;
+  letter-spacing: clamp(1px, 0.3vw, 3px);
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: clamp(0.5rem, 2vh, 1.5rem);
+}
+
+.names-circle {
+  position: relative;
+  width: clamp(150px, 25vw, 250px);
+  height: clamp(150px, 25vw, 250px);
+  border: clamp(1px, 0.3vw, 3px) solid #cdbb59;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(205, 187, 89, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.names-circle::before {
+  content: "";
+  position: absolute;
+  top: clamp(-5px, -1.5vw, -15px);
+  left: clamp(-5px, -1.5vw, -15px);
+  right: clamp(-5px, -1.5vw, -15px);
+  bottom: clamp(-5px, -1.5vw, -15px);
+  border: 1px solid rgba(205, 187, 89, 0.3);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.couple-names {
+  font-family: "Monsieur La Doulaise", cursive;
+  font-size: clamp(2rem, 5vw, 4rem);
+  color: #cdbb59;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
+}
+
+.date-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+  color: #ffffff;
+  letter-spacing: clamp(1px, 0.4vw, 4px);
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-top: clamp(0.5rem, 2vh, 1.5rem);
+  padding: clamp(0.3rem, 1vh, 0.7rem) clamp(0.5rem, 2vw, 1.5rem);
+  border-top: 1px solid #cdbb59;
+  border-bottom: 1px solid #cdbb59;
+}
+
+.address-text {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(0.75rem, 1.4vw, 1.05rem);
+  color: #cccccc;
+  line-height: 1.4;
+  margin-top: clamp(0.5rem, 1.5vh, 1rem);
+  max-width: 85%;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Menu Card Styles */
+.menu-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  padding: clamp(2rem, 5vh, 3rem) clamp(1.5rem, 4vw, 2.5rem);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-title {
+  font-family: "Herr Von Muellerhoff", cursive;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #cdbb59;
+  text-align: center;
+  margin-bottom: clamp(1rem, 3vh, 2rem);
+  font-weight: 600;
+}
+
+.menu-section {
+  margin-bottom: clamp(1rem, 2.5vh, 2rem);
+}
+
+.menu-section h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(0.8rem, 1.6vw, 1.2rem);
+  color: #cdbb59;
+  letter-spacing: clamp(1px, 0.3vw, 3px);
+  text-transform: uppercase;
+  margin-bottom: clamp(0.3rem, 1vh, 0.7rem);
+  font-weight: 500;
+}
+
+.menu-section p {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(0.7rem, 1.4vw, 1rem);
+  color: #cccccc;
+  line-height: 1.4;
+  font-style: italic;
+  margin: 0;
+}
+
+.menu-couple-names {
+  font-family: "Herr Von Muellerhoff", cursive;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: #cdbb59;
+  text-align: center;
+  font-weight: 500;
+  margin-top: clamp(0.5rem, 2vh, 1.5rem);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .invitation-container {
+    flex-direction: column;
+    gap: clamp(1rem, 3vh, 2rem);
+    padding: clamp(0.5rem, 2vw, 1.5rem);
+  }
+
+  .card-flip {
+    /* Keep the same vh-based sizing on mobile while preventing overflow */
+    height: min(100vh, calc(100vw * 1.5));
+    aspect-ratio: 2 / 3;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .card-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .names-circle {
+    width: 160px;
+    height: 160px;
+  }
+}
