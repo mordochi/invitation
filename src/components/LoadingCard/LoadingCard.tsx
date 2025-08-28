@@ -1,5 +1,4 @@
 import React from "react";
-import "../../styles/shared.css";
 import "./LoadingCard.css";
 
 const LoadingCard: React.FC = () => {

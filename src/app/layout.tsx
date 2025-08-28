@@ -5,6 +5,9 @@ import {
   Monsieur_La_Doulaise,
 } from "next/font/google";
 import "./globals.css";
+import "../styles/shared.css";
+import "@/components/InvitationCard/InvitationCard.css";
+import "@/components/LoadingCard/LoadingCard.css";
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],

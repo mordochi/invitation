@@ -1,6 +1,5 @@
 "use client";
 import React, { useCallback, useState } from "react";
-import "../../styles/shared.css";
 import "./InvitationCard.css";
 
 interface InvitationCardProps {
