@@ -182,7 +182,7 @@
 
 .venue-text {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(0.7rem, 1.5vw, 1.1rem);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
   color: #cdbb59;
   letter-spacing: clamp(1px, 0.3vw, 3px);
   text-transform: uppercase;
@@ -192,8 +192,8 @@
 
 .names-circle {
   position: relative;
-  width: clamp(150px, 25vw, 250px);
-  height: clamp(150px, 25vw, 250px);
+  width: clamp(230px, 25vw, 300px);
+  height: clamp(230px, 25vw, 300px);
   border: clamp(1px, 0.3vw, 3px) solid #cdbb59;
   border-radius: 50%;
   display: flex;
@@ -217,7 +217,7 @@
 
 .couple-names {
   font-family: var(--font-monsieur-la-doulaise), cursive;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(3rem, 5vw, 4rem);
   color: #cdbb59;
   font-weight: 500;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -316,7 +316,7 @@
   }
 
   .names-circle {
-    width: 160px;
-    height: 160px;
+    width: 230px;
+    height: 230px;
   }
 }
