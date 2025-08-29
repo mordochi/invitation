@@ -41,6 +41,7 @@ const eslintConfig = [
           js: "never",
           ts: "never",
           tsx: "never",
+          mjs: "never",
         },
       ],
       "react/jsx-filename-extension": [
