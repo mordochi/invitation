@@ -248,29 +248,47 @@
   word-break: break-word;
 }
 
+.dress-code-text {
+  font-family: var(--font-cormorant), serif;
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+  color: #cdbb59;
+  letter-spacing: clamp(0.5px, 0.2vw, 2px);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: clamp(0.8rem, 2vh, 1.2rem);
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+  p {
+    font-size: clamp(0.6rem, 1.2vw, 0.8rem);
+  }
+}
+
 /* Menu Card Styles */
 .menu-content {
   position: relative;
   z-index: 2;
   height: 100%;
-  padding: clamp(2rem, 5vh, 3rem) clamp(1.5rem, 4vw, 2.5rem);
+  padding: clamp(1rem, 2.8vh, 2.2rem) clamp(1.5rem, 4vw, 2.5rem);
   color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.menu-title {
-  font-family: var(--font-herr-von-muellerhoff), cursive;
-  font-size: clamp(2rem, 4vw, 3rem);
-  color: #cdbb59;
-  text-align: center;
-  margin-bottom: clamp(1rem, 3vh, 2rem);
-  font-weight: 600;
+.activity-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 4vh, 2.3rem);
 }
 
-.menu-section {
-  margin-bottom: clamp(1rem, 2.5vh, 2rem);
+.menu-title {
+  font-family: var(--font-herr-von-muellerhoff), cursive;
+  font-size: clamp(2.5rem, 4vw, 5rem);
+  color: #cdbb59;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: clamp(1px, 0.4vw, 0.3rem);
 }
 
 .menu-section h3 {
@@ -281,20 +299,49 @@
   text-transform: uppercase;
   margin-bottom: clamp(0.3rem, 1vh, 0.7rem);
   font-weight: 500;
+  position: relative;
 }
 
-.menu-section p {
+.hidden-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hidden-title {
+  position: relative;
+  height: 20px;
+  margin-bottom: clamp(0.5rem, 1.2vh, 2rem);
+  margin-left: 30px;
+}
+
+.activity-time {
   font-family: var(--font-cormorant), serif;
-  font-size: clamp(0.7rem, 1.4vw, 1rem);
+  font-size: clamp(1.1rem, 4.2vw, 2rem);
   color: #cccccc;
   line-height: 1.4;
   font-style: italic;
   margin: 0;
 }
 
+.hidden-title-sparkle {
+  position: absolute;
+  background: radial-gradient(circle, #cdbb59 0%, #d4c366 50%, transparent 70%);
+  animation: sparkleAnimation 3s infinite ease-in-out;
+}
+
+.menu-section p {
+  font-family: var(--font-noto-serif-hk), serif;
+  font-size: clamp(0.6rem, 2.5vw, 1rem);
+  color: #cccccc;
+  line-height: 1.4;
+  margin: 0;
+  font-style: italic;
+}
+
 .menu-couple-names {
   font-family: var(--font-herr-von-muellerhoff), cursive;
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-size: clamp(1.3rem, 2.4vw, 3.6rem);
   color: #cdbb59;
   text-align: center;
   font-weight: 500;
@@ -318,5 +365,9 @@
   .names-circle {
     width: 230px;
     height: 230px;
+  }
+
+  .hidden-title {
+    margin-left: 10px;
   }
 }

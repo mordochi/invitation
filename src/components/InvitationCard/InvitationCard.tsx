@@ -1,6 +1,7 @@
 "use client";
 import React, { useCallback, useState } from "react";
 import "./InvitationCard.css";
+import HiddenTitle from "./HiddenTitle";
 
 interface InvitationCardProps {
   coupleNames?: string;
@@ -70,6 +71,9 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
               <br />
               Jiaxing St., Xinyi Dist., Taipei City
             </div>
+            <div className="dress-code-text">
+              Dress Code: Black<p>Whatever makes you shine!</p>
+            </div>
           </div>
         </div>
 
@@ -91,31 +95,33 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
           </div>
 
           <div className="menu-content">
-            <div className="menu-title">Menu</div>
+            <div className="menu-title">Wen?</div>
 
-            <div className="menu-section">
-              <h3>STARTERS</h3>
-              <p>
-                starter number 1<br />
-                entrées
-              </p>
-            </div>
+            <div className="activity-container">
+              <div className="menu-section">
+                <HiddenTitle width={44} time="11:00 - 11:40" />
+                <p>啟程、橘、莓</p>
+              </div>
 
-            <div className="menu-section">
-              <h3>MAIN DISHES</h3>
-              <p>
-                your main dish 1<br />
-                delicious dishes
-              </p>
-            </div>
+              <div className="menu-section">
+                <HiddenTitle width={25} time="12:00 - 13:30" />
+                <p>喘息、歐風、綠意</p>
+              </div>
 
-            <div className="menu-section">
-              <h3>DESSERTS</h3>
-              <p>
-                tasty cakes
-                <br />
-                chocolate & fruits
-              </p>
+              <div className="menu-section">
+                <HiddenTitle width={33} time="14:00 - 17:00" />
+                <p>沉浸、層次、意外</p>
+              </div>
+
+              <div className="menu-section">
+                <HiddenTitle width={57} time="18:00 - 21:00" />
+                <p>驚喜、技藝、純粹</p>
+              </div>
+
+              <div className="menu-section">
+                <HiddenTitle time="21:15 - 22:00" />
+                <p>餘韻、浸潤、呼嚕</p>
+              </div>
             </div>
 
             <div className="menu-couple-names">{coupleNames}</div>
