@@ -8,6 +8,7 @@ import {
 import "./globals.css";
 import "../styles/shared.css";
 import "@/components/InvitationCard/InvitationCard.css";
+import "@/components/InvitationCard/FirstTimeHint.css";
 import "@/components/LoadingCard/LoadingCard.css";
 
 const cormorantGaramond = Cormorant_Garamond({

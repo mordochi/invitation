@@ -1,15 +1,13 @@
 "use client";
 import React, { useCallback, useState } from "react";
 import "./InvitationCard.css";
+import FirstTimeHint from "./FirstTimeHint";
 import HiddenTitle from "./HiddenTitle";
 
 interface InvitationCardProps {
   coupleNames?: string;
   date?: string;
   venue?: string;
-  time?: string;
-  showMenu?: boolean;
-  address?: string;
 }
 
 const InvitationCard: React.FC<InvitationCardProps> = ({
@@ -18,6 +16,7 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
   venue = "TO CELEBRATE Wen's Birthday",
 }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [showHint, setShowHint] = useState(true);
 
   const toggleFlip = useCallback(() => setIsFlipped((v) => !v), []);
 
@@ -127,6 +126,9 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
             <div className="menu-couple-names">{coupleNames}</div>
           </div>
         </div>
+
+        {/* First Time Hint Overlay */}
+        {showHint && <FirstTimeHint onDismiss={() => setShowHint(false)} />}
       </div>
     </div>
   );
