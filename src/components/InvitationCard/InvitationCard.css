@@ -11,29 +11,29 @@
   max-height: calc(100dvh - var(--pad) * 2);
   min-width: 200px; /* ensure visibility on very small widths */
   background:
-  radial-gradient(
-    circle at 20% 30%,
-    rgba(40, 40, 40, 0.3) 0%,
-    transparent 50%
-  ),
-  radial-gradient(
-    circle at 80% 70%,
-    rgba(60, 60, 60, 0.2) 0%,
-    transparent 50%
-  ),
-  linear-gradient(
-    135deg,
-    #0a0a0a 0%,
-    #1a1a1a 25%,
-    #000000 50%,
-    #1a1a1a 75%,
-    #0a0a0a 100%
-  );
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(40, 40, 40, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(60, 60, 60, 0.2) 0%,
+      transparent 50%
+    ),
+    linear-gradient(
+      135deg,
+      #0a0a0a 0%,
+      #1a1a1a 25%,
+      #000000 50%,
+      #1a1a1a 75%,
+      #0a0a0a 100%
+    );
   border-radius: 12px;
   box-shadow:
-  0 20px 40px rgba(0, 0, 0, 0.6),
-  inset 0 1px 0 rgba(255, 255, 255, 0.1),
-  inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
   /* Enable 3D stacking for faces */
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
@@ -57,38 +57,64 @@
 }
 
 @keyframes fade-out {
-  1%, 40%{
+  1%,
+  40% {
     opacity: 1;
   }
 
-  45%, 100% {
+  45%,
+  100% {
     opacity: 0;
   }
 }
 
 @keyframes fade-in {
-  1%, 40%{
+  1%,
+  40% {
     opacity: 0;
   }
 
-  45%, 100% {
+  45%,
+  100% {
     opacity: 1;
   }
 }
 
 /* Removed child-level backface rules to avoid iOS hiding content */
 
-.front { transform: rotateY(0deg); z-index: 1; animation: fade-in 0.5s ease forwards; }
-.back { transform: rotateY(-180deg); z-index: 0; opacity: 0; animation: fade-out 0.5s ease forwards; }
+.front {
+  transform: rotateY(0deg);
+  z-index: 1;
+  animation: fade-in 0.5s ease forwards;
+}
+.back {
+  transform: rotateY(-180deg);
+  z-index: 0;
+  opacity: 0;
+  animation: fade-out 0.5s ease forwards;
+}
 
 /* Interaction: only the visible face should be interactive */
-.card-flip:not(.is-flipped) .back { pointer-events: none; }
-.card-flip.is-flipped .front { pointer-events: none; z-index: 0; animation: fade-out 0.5s ease forwards; }
-.card-flip.is-flipped .back { z-index: 1; animation: fade-in 0.5s ease forwards; }
+.card-flip:not(.is-flipped) .back {
+  pointer-events: none;
+}
+.card-flip.is-flipped .front {
+  pointer-events: none;
+  z-index: 0;
+  animation: fade-out 0.5s ease forwards;
+}
+.card-flip.is-flipped .back {
+  z-index: 1;
+  animation: fade-in 0.5s ease forwards;
+}
 
 /* Default state: back is hidden and non-interactive */
-.card-flip:not(.is-flipped) .back { pointer-events: none; }
-.card-flip:not(.is-flipped) .front { pointer-events: auto; }
+.card-flip:not(.is-flipped) .back {
+  pointer-events: none;
+}
+.card-flip:not(.is-flipped) .front {
+  pointer-events: auto;
+}
 
 /* Remove backface rules; not needed with crossfade */
 
@@ -165,6 +191,30 @@
   50% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes sparklesFadeAway {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
@@ -291,17 +341,6 @@
   letter-spacing: clamp(1px, 0.4vw, 0.3rem);
 }
 
-.menu-section h3 {
-  font-family: var(--font-cormorant), serif;
-  font-size: clamp(0.8rem, 1.6vw, 1.2rem);
-  color: #cdbb59;
-  letter-spacing: clamp(1px, 0.3vw, 3px);
-  text-transform: uppercase;
-  margin-bottom: clamp(0.3rem, 1vh, 0.7rem);
-  font-weight: 500;
-  position: relative;
-}
-
 .hidden-title-container {
   display: flex;
   align-items: center;
@@ -312,6 +351,30 @@
   position: relative;
   height: 20px;
   margin-bottom: clamp(0.5rem, 1.2vh, 2rem);
+}
+
+.hidden-title-text {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-noto-serif-hk), serif;
+  font-size: clamp(0.8rem, 3.4vw, 1.2rem);
+  text-align: right;
+  color: #cdbb59;
+  opacity: 0;
+  animation: titleReveal 6s ease-in-out forwards;
+}
+
+.hidden-title-sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  animation: sparklesFadeAway 6s ease-in-out forwards;
+}
+
+.hidden-title {
   margin-left: 30px;
 }
 
