@@ -1,5 +1,10 @@
 "use client";
-import React, { useCallback, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import "./InvitationCard.css";
 import FirstTimeHint from "./FirstTimeHint";
 import HiddenTitle from "./HiddenTitle";
@@ -15,10 +20,14 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
   date = "Sep 6 2025",
   venue = "TO CELEBRATE Wen's Birthday",
 }) => {
+  const [isInitialized, setIsInitialized] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [showHint, setShowHint] = useState(true);
 
-  const toggleFlip = useCallback(() => setIsFlipped((v) => !v), []);
+  const toggleFlip = useCallback(() => {
+    setIsFlipped((v) => !v);
+    setIsInitialized(true);
+  }, []);
 
   const onKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -41,7 +50,9 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
         onKeyDown={onKeyDown}
       >
         {/* Front Face - Invitation */}
-        <div className="card-face invitation-card front">
+        <div
+          className={`invitation-card front ${isInitialized ? "initialized" : ""}`}
+        >
           <div className="sparkles">
             {[...Array(50)].map((_, i) => (
               <div
@@ -77,7 +88,7 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
         </div>
 
         {/* Back Face - Menu */}
-        <div className="card-face menu-card back">
+        <div className={`menu-card back ${isInitialized ? "initialized" : ""}`}>
           <div className="sparkles">
             {[...Array(40)].map((_, i) => (
               <div

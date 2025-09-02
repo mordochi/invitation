@@ -50,12 +50,6 @@
   -webkit-transform: rotateY(180deg);
 }
 
-.card-face {
-  position: absolute;
-  inset: 0;
-  display: block;
-}
-
 @keyframes fade-out {
   1%,
   40% {
@@ -85,13 +79,11 @@
 .front {
   transform: rotateY(0deg);
   z-index: 1;
-  animation: fade-in 0.5s ease forwards;
 }
 .back {
   transform: rotateY(-180deg);
   z-index: 0;
   opacity: 0;
-  animation: fade-out 0.5s ease forwards;
 }
 
 /* Interaction: only the visible face should be interactive */
@@ -114,6 +106,14 @@
 }
 .card-flip:not(.is-flipped) .front {
   pointer-events: auto;
+}
+
+.card-flip:not(.is-flipped) .back.initialized {
+  animation: fade-out 0.5s ease forwards;
+}
+.card-flip:not(.is-flipped) .front.initialized {
+  opacity: 0;
+  animation: fade-in 0.5s ease forwards;
 }
 
 /* Remove backface rules; not needed with crossfade */
