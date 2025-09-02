@@ -1,35 +1,57 @@
+import { useEffect, useState } from "react";
+import TitleSparkles from "./TitleSparkles";
+
 export default function HiddenTitle({
   width = 35,
   time,
   title,
+  revealTime,
 }: {
   width?: number;
   time?: string;
   title?: string;
+  revealTime?: Date;
 }) {
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  useEffect(() => {
+    if (!revealTime) {
+      setShouldAnimate(true);
+      return;
+    }
+
+    const checkTime = () => {
+      const now = new Date();
+      if (now.valueOf() >= revealTime.valueOf()) {
+        setShouldAnimate(true);
+        clearInterval(interval);
+      }
+    };
+
+    // Check immediately
+    checkTime();
+
+    // Check every second
+    const interval = setInterval(checkTime, 1000);
+
+    return () => clearInterval(interval);
+  }, [revealTime]);
+
   return (
     <div className="hidden-title-container">
       <div className="activity-time">{time}</div>
       <div className="hidden-title" style={{ width: `${width}%` }}>
-        {title && <div className="hidden-title-text">{title}</div>}
-        <div className="hidden-title-sparkles">
-          {[...Array(Math.round(width * 2.3))].map((_, i) => {
-            const size = 2 + Math.random() * 3.5;
-            return (
-              <div
-                key={i}
-                className="hidden-title-sparkle"
-                style={{
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  left: `${Math.random() * 100 + (Math.random() < 0.5 ? -1 : 1) * Math.random() * 10}%`,
-                  top: `${Math.random() * 100 + (Math.random() < 0.5 ? -1 : 1) * Math.random() * 14}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`,
-                }}
-              />
-            );
-          })}
+        {title && (
+          <div
+            className={`hidden-title-text ${shouldAnimate ? "animate" : ""}`}
+          >
+            {title}
+          </div>
+        )}
+        <div
+          className={`hidden-title-sparkles ${shouldAnimate ? "animate" : ""}`}
+        >
+          <TitleSparkles width={width} />
         </div>
       </div>
     </div>

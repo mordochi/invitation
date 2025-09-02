@@ -361,6 +361,9 @@
   text-align: right;
   color: #cdbb59;
   opacity: 0;
+}
+
+.hidden-title-text.animate {
   animation: titleReveal 6s ease-in-out forwards;
 }
 
@@ -371,6 +374,9 @@
   width: 100%;
   height: 100%;
   z-index: 2;
+}
+
+.hidden-title-sparkles.animate {
   animation: sparklesFadeAway 6s ease-in-out forwards;
 }
 
