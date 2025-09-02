@@ -364,7 +364,7 @@
 }
 
 .hidden-title-text.animate {
-  animation: titleReveal 6s ease-in-out forwards;
+  animation: titleReveal 2.5s ease-in-out forwards;
 }
 
 .hidden-title-sparkles {
@@ -377,7 +377,7 @@
 }
 
 .hidden-title-sparkles.animate {
-  animation: sparklesFadeAway 6s ease-in-out forwards;
+  animation: sparklesFadeAway 2.5s ease-in-out forwards;
 }
 
 .hidden-title {

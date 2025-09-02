@@ -5,26 +5,32 @@ export default function HiddenTitle({
   width = 35,
   time,
   title,
+  isInView,
   revealTime,
 }: {
   width?: number;
   time?: string;
   title?: string;
+  isInView?: boolean;
   revealTime?: Date;
 }) {
   const [shouldAnimate, setShouldAnimate] = useState(false);
 
   useEffect(() => {
+    if (!isInView) return;
+
     if (!revealTime) {
       setShouldAnimate(true);
       return;
     }
 
+    let interval: NodeJS.Timeout | undefined = undefined;
+
     const checkTime = () => {
       const now = new Date();
       if (now.valueOf() >= revealTime.valueOf()) {
         setShouldAnimate(true);
-        clearInterval(interval);
+        if (interval) clearInterval(interval);
       }
     };
 
@@ -32,10 +38,10 @@ export default function HiddenTitle({
     checkTime();
 
     // Check every second
-    const interval = setInterval(checkTime, 1000);
+    interval = setInterval(checkTime, 1000);
 
     return () => clearInterval(interval);
-  }, [revealTime]);
+  }, [isInView, revealTime, title]);
 
   return (
     <div className="hidden-title-container">
