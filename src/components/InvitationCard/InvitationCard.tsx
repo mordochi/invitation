@@ -1,10 +1,5 @@
 "use client";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useState,
-} from "react";
+import React, { useCallback, useState } from "react";
 import "./InvitationCard.css";
 import FirstTimeHint from "./FirstTimeHint";
 import HiddenTitle from "./HiddenTitle";
