@@ -367,6 +367,11 @@
   animation: titleReveal 2.5s ease-in-out forwards;
 }
 
+.hidden-title-text.visible {
+  opacity: 1;
+  animation: none;
+}
+
 .hidden-title-sparkles {
   position: absolute;
   top: 0;

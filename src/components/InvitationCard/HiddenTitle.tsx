@@ -15,9 +15,33 @@ export default function HiddenTitle({
   revealTime?: Date;
 }) {
   const [shouldAnimate, setShouldAnimate] = useState(false);
+  const [hasSeen, setHasSeen] = useState(false);
+
+  // Key to store whether this title has been seen
+  const seenKey = title ? `invitation-card-title-seen:${title}` : undefined;
+
+  // Read seen flag on mount/title change
+  useEffect(() => {
+    if (!seenKey) return;
+    try {
+      const val =
+        typeof window !== "undefined"
+          ? window.localStorage.getItem(seenKey)
+          : null;
+      if (val === "true") {
+        setHasSeen(true);
+      } else {
+        setHasSeen(false);
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, [seenKey]);
 
   useEffect(() => {
     if (!isInView) return;
+    // If already seen, skip animation entirely
+    if (hasSeen) return;
 
     if (!revealTime) {
       setShouldAnimate(true);
@@ -41,7 +65,19 @@ export default function HiddenTitle({
     interval = setInterval(checkTime, 1000);
 
     return () => clearInterval(interval);
-  }, [isInView, revealTime, title]);
+  }, [isInView, revealTime, hasSeen]);
+
+  const handleAnimationEnd = () => {
+    if (!seenKey) return;
+    try {
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(seenKey, "true");
+      }
+    } catch {
+      // ignore storage errors
+    }
+    setHasSeen(true);
+  };
 
   return (
     <div className="hidden-title-container">
@@ -49,16 +85,19 @@ export default function HiddenTitle({
       <div className="hidden-title" style={{ width: `${width}%` }}>
         {title && (
           <div
-            className={`hidden-title-text ${shouldAnimate ? "animate" : ""}`}
+            className={`hidden-title-text ${hasSeen ? "visible" : shouldAnimate ? "animate" : ""}`}
           >
             {title}
           </div>
         )}
-        <div
-          className={`hidden-title-sparkles ${shouldAnimate ? "animate" : ""}`}
-        >
-          <TitleSparkles width={width} />
-        </div>
+        {!hasSeen && (
+          <div
+            className={`hidden-title-sparkles ${shouldAnimate ? "animate" : ""}`}
+            onAnimationEnd={shouldAnimate ? handleAnimationEnd : undefined}
+          >
+            <TitleSparkles width={width} />
+          </div>
+        )}
       </div>
     </div>
   );
