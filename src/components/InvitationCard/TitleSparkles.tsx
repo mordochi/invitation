@@ -3,7 +3,7 @@ import { memo } from "react";
 function TitleSparkles({ width }: { width: number }) {
   return (
     <div>
-      {[...Array(Math.round(width * 2.3))].map((_, i) => {
+      {[...Array(Math.round(width * 2.2))].map((_, i) => {
         const size = 2 + Math.random() * 3.5;
         return (
           <div

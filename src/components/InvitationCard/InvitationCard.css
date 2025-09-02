@@ -443,6 +443,7 @@
   }
 
   .hidden-title {
+    height: 12px;
     margin-left: 10px;
   }
 }
