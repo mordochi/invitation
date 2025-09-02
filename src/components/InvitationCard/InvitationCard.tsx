@@ -105,7 +105,6 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
             <div className="activity-container">
               <div className="menu-section">
                 <HiddenTitle
-                  width={44}
                   time="11:30 - 12:15"
                   title="蛋糕 & 禮物"
                   revealTime={new Date("2025-09-06T11:30:00")}
@@ -127,7 +126,7 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
 
               <div className="menu-section">
                 <HiddenTitle
-                  width={33}
+                  width={44}
                   time="14:00 - 17:00"
                   title="Painting Stage"
                   revealTime={new Date("2025-09-06T14:00:00")}
@@ -138,7 +137,7 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
 
               <div className="menu-section">
                 <HiddenTitle
-                  width={57}
+                  width={36}
                   time="18:00 - 21:00"
                   title="一宗壽司"
                   revealTime={new Date("2025-09-06T18:00:00")}
@@ -149,6 +148,7 @@ const InvitationCard: React.FC<InvitationCardProps> = ({
 
               <div className="menu-section">
                 <HiddenTitle
+                  width={52}
                   time="21:15 - 22:00"
                   title="Belinda Coffee"
                   revealTime={new Date("2025-09-06T21:15:00")}
